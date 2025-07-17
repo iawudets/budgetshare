@@ -10,12 +10,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long user_id;
 
+    // user_list <- many/many -> budget_list
     @ManyToMany
-    @JoinColumn(name = "user_list")
+    @JoinTable(name = "user_budget",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "budget_id"))
     private List<Budget> budget_list;
 
-    @OneToMany
-    @JoinColumn(name = "owner")
+    @OneToMany(mappedBy = "owner")
     private List<Budget> owned_list;
 
     @Column(name = "name")
@@ -24,7 +26,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany
-    @JoinColumn(name = "initiator")
+    @OneToMany(mappedBy = "initiator")
     private List<Transaction> transactions;
 }

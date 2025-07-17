@@ -31,9 +31,11 @@ public class Budget {
     @Column(name = "shared_num")
     private int shared_num;
 
+    // budget_list <- many/many -> user_list
     @ManyToMany(mappedBy = "budget_list")
     private List<User> user_list;
 
     @ManyToOne
+    @JoinColumn(name = "owned_list")
     private User owner;
 }

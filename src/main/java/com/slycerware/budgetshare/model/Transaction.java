@@ -23,6 +23,6 @@ public class Transaction {
     private float delta;
 
     @ManyToOne
-    @JoinColumn(name = "transactions")
+    @JoinColumn(name = "initiator_id")
     private User initiator;
 }
